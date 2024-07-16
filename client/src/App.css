@@ -1,0 +1,93 @@
+.custom-button {
+    padding: 7px 13px;
+    transition: all 0.2s ease;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.custom-button:hover {
+    box-shadow: 0 0 0 2px white;
+    transform: scale(1.02)
+}
+
+.custom-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.alert-container {
+    position: fixed;
+    top: 82px;
+    right: -300px;
+    z-index: 9999;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.5s forwards, slideOutRight 0.5s forwards 3.7s;
+    z-index: 9999;
+}
+
+@keyframes slideInRight {
+    0% {
+        right: -300px;
+    }
+    100% {
+        right: 325px;
+    }
+}
+
+@keyframes slideOutRight {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.login-container {
+    padding-top: 5.1rem;
+}
+
+body,
+html,
+#root {
+    background-color: #1a1d20;
+    color: #ffffff;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.container-slide-in-left {
+    animation: slideInFromLeft 0.5s ease-out;
+}
+
+.container-slide-in-right {
+    animation: slideInFromRight 0.5s ease-out;
+}

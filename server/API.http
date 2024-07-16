@@ -1,0 +1,109 @@
+# Test APIs
+
+### Login
+POST http://localhost:3001/api/sessions
+Content-Type: application/json
+
+{
+  "username": "user1@gmail.com",
+  "password": "exam"
+}
+
+
+### Check if the user is logged in
+GET http://localhost:3001/api/sessions/current
+
+### Get all the car models
+GET http://localhost:3001/api/carModels
+
+### Get all the accessories
+GET http://localhost:3001/api/accessories
+
+### Retrieve a car configuration
+GET http://localhost:3001/api/user/configuration
+
+### Save a new car configuration
+POST http://localhost:3001/api/user/configuration
+Content-Type: application/json
+
+{
+  "carModelId": 2,
+  "accessories": [1,2,3]
+}
+
+### Update a car configuration
+PUT http://localhost:3001/api/user/configuration/edit
+Content-Type: application/json
+
+{
+  "carModelId": 2,
+  "accessories": [1,3]
+}
+
+### Delete a car configuration
+DELETE http://localhost:3001/api/user/configuration
+
+### Get authentication token
+GET http://localhost:3001/api/auth-token
+
+### Logout the current user
+DELETE http://localhost:3001/api/sessions/current
+
+### ----------------------------------------------------------------------------------
+
+# Negative Tests
+
+### Login with incorrect password
+POST http://localhost:3001/api/sessions
+Content-Type: application/json
+
+{
+  "username": "user1@gmail.com",
+  "password": "aaabbb"
+}
+
+
+### Save a new car configuration with invalid fields
+POST http://localhost:3001/api/user/configuration
+Content-Type: application/json
+
+{
+  "carModelId": 0,
+  "accessories": "1,2"
+}
+
+### Save a new car configuration with invalid accessories constraints
+POST http://localhost:3001/api/user/configuration
+Content-Type: application/json
+
+{
+  "carModelId": 3,
+  "accessories": [1,2,3,4,7,8]
+}
+
+### Save a new car configuration with exceeding accessories for car model
+POST http://localhost:3001/api/user/configuration
+Content-Type: application/json
+
+{
+  "carModelId": 2,
+  "accessories": [1,2,3,4,5,6]
+}
+
+### Update a car configuration with duplicates
+PUT http://localhost:3001/api/user/configuration/edit
+Content-Type: application/json
+
+{
+  "carModelId": 2,
+  "accessories": [1,1,3]
+}
+
+### Save a new car configuration with duplicates
+POST http://localhost:3001/api/user/configuration
+Content-Type: application/json
+
+{
+  "carModelId": 1,
+  "accessories": [1,1,3,3]
+}

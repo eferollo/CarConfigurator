@@ -1,0 +1,42 @@
+# Test estimation API
+
+# Login to the main server for retrieving a valid token
+### Login with user 1 (good client)
+POST http://localhost:3001/api/sessions
+Content-Type: application/json
+
+{
+  "username": "user1@gmail.com",
+  "password": "exam"
+}
+
+### Get authentication token
+GET http://localhost:3001/api/auth-token
+
+> {% client.global.set("auth_token", response.body.token); %}
+
+
+### Test estimation API with valid accessories and token
+POST http://localhost:3002/api/estimate
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "accessories": ["bluetooth", "power windows", "air conditioning", "spare tire"]
+}
+
+
+### Test estimation API with missing accessories field
+POST http://localhost:3002/api/estimate
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+
+### Expired token
+POST http://localhost:3002/api/estimate
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJwcmVtaXVtIiwiYXV0aElkIjoxMjM0LCJpYXQiOjE3MTY2NDgwNDMsImV4cCI6MTcxNjY0ODEwM30.oOVCsKf_Ua7DRHlVRBrmg9mU0sxaf3fN37JphyxTwLw
+
+{
+  "accessories": ["radio", "bluetooth"]
+}
